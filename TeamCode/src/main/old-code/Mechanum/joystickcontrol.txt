@@ -1,0 +1,11 @@
+angle = 90 //integer from 0 to 359
+scale = 1 //float from 0 to 1. both values should be extrapolated from the x and y values of the joystick.
+if angle < 180 { //defines function for the joystick being on the right half of the circle
+	rmotor = scale * range.clip((45-angle)/45,-1,1) // makes the right motor value change from 1 to -1 from angles 0 to 90
+	lmotor = scale * range.clip((135-angle)/45,-1,1) // makes the left motor value change from 1 to -1 from angles 90 to 180
+} else { //defines function for the joystick being on the left half of the circle
+	rmotor = scale * range.clip((angle-225)/45,-1,1) // makes the right motor value change from -1 to 1 from angles 180 to 270
+	lmotor = scale * range.clip((angle-315)/45,-1,1) // makes the left motor value change from -1 to 1 from angles 270 to 360
+}
+left.setPower(lmotor)
+right.setPower(rmotor)
